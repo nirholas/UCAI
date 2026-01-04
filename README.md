@@ -11,7 +11,7 @@
     Any contract. One command. Claude speaks it.
 ```
 
-<!-- mcp-name: io.github.nirholas/abi-to-mcp -->
+<!-- mcp-name: io.github.nirholas/UCAI -->
 
 [![PyPI version](https://badge.fury.io/py/abi-to-mcp.svg)](https://badge.fury.io/py/abi-to-mcp)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
@@ -210,52 +210,68 @@ Every contract becomes AI-accessible through the same interface. No custom code 
 
 ---
 
-## Installation
+## Real Examples
 
-### Generate from Contract Address (Etherscan)
-
-```bash
-# USDC on Ethereum
-abi-to-mcp generate 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48
-
-# Uniswap V2 Router
-abi-to-mcp generate 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
-
-# Any contract on Polygon
-abi-to-mcp generate 0x... --network polygon
-```
-
-### Generate from Local ABI File
+### 🦄 Uniswap: Swap tokens with natural language
 
 ```bash
-abi-to-mcp generate ./my-contract-abi.json --address 0x...
+abi-to-mcp generate 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D -o ~/uniswap-server
 ```
+
+Now ask Claude:
+> *"What's the current rate for swapping 10 ETH to USDC?"*
+
+Claude calls `getAmountsOut()` and responds:
+> *"10 ETH → 38,472.31 USDC via the WETH/USDC pool. Want me to simulate the swap?"*
 
 ---
 
-## Generated Tools
+### 🏦 Aave: Check your health factor
 
-For a standard ERC20 token, you get:
+```bash
+abi-to-mcp generate 0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2 -o ~/aave-server
+```
 
-| Tool | Type | Description |
-|------|------|-------------|
-| `name()` | Read | Get token name |
-| `symbol()` | Read | Get token symbol |
-| `decimals()` | Read | Get decimal places |
-| `totalSupply()` | Read | Get total supply |
-| `balanceOf(account)` | Read | Get balance for address |
-| `allowance(owner, spender)` | Read | Get spending allowance |
-| `transfer(to, amount)` | Write | Transfer tokens (simulated by default) |
-| `approve(spender, amount)` | Write | Approve spending (simulated by default) |
-| `transferFrom(from, to, amount)` | Write | Transfer on behalf (simulated by default) |
-| `get_transfer_events()` | Query | Get Transfer event history |
-| `get_approval_events()` | Query | Get Approval event history |
-| `get_contract_info()` | Utility | Contract metadata and connection status |
-| `format_units(amount)` | Utility | Convert wei to human-readable |
-| `parse_units(amount)` | Utility | Convert human-readable to wei |
-| `get_balance(address)` | Utility | Get native ETH balance |
+> *"What's my health factor on Aave? Am I at risk of liquidation?"*
 
-All write operations **simulate by default** — no accidental transactions.
+Claude reads your position and warns you before it's too late.
+
+---
+
+### 🎨 Any NFT: Explore collections
+
+```bash
+abi-to-mcp generate 0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D -o ~/bayc-server
+```
+
+> *"Who owns BAYC #8817? How many apes does that wallet have?"*
+
+Claude calls `ownerOf()` and `balanceOf()` to answer.
+
+---
+
+### 🔮 Your own contract
+
+```bash
+abi-to-mcp generate ./my-contract-abi.json --address 0x... -o ~/my-server
+```
+
+Any verified contract. Any local ABI. One command.
+
+---
+
+## What Gets Generated?
+
+When you point abi-to-mcp at a contract, it introspects every function and event, then generates tools Claude can call:
+
+| Contract has... | You get... | Claude can... |
+|-----------------|------------|---------------|
+| `balanceOf(address)` | Read tool | *"Check vitalik.eth's USDC balance"* |
+| `swap(path, amount)` | Write tool (simulated) | *"Swap 1 ETH for DAI"* — simulates first, shows you gas |
+| `Transfer` event | Query tool | *"Show me the last 10 transfers over $1M"* |
+| Complex structs | Typed schemas | Handles tuples, arrays, nested data |
+
+**15-30 tools per contract**, fully typed, simulation-protected for writes.
 
 ## CLI Reference
 
