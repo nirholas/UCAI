@@ -1,0 +1,42 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.nirholas/abi-to-mcp",
+  "description": "UCAI (Universal Contract AI Interface) - Generate MCP servers from any smart contract ABI",
+  "title": "ABI to MCP (UCAI Standard)",
+  "repository": {
+    "url": "https://github.com/nirholas/UCAI",
+    "source": "github"
+  },
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "registryBaseUrl": "https://pypi.org",
+      "identifier": "abi-to-mcp",
+      "version": "0.1.0",
+      "runtimeHint": "uvx",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "WEB3_PROVIDER_URL",
+          "description": "Ethereum JSON-RPC endpoint URL",
+          "isRequired": false
+        },
+        {
+          "name": "ETHERSCAN_API_KEY",
+          "description": "Etherscan API key for fetching verified contract ABIs",
+          "isRequired": false,
+          "isSecret": true
+        },
+        {
+          "name": "PRIVATE_KEY",
+          "description": "Private key for signing transactions (write operations)",
+          "isRequired": false,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}
