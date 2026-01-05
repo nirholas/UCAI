@@ -120,7 +120,7 @@ function HomeContent() {
     setError(null);
     
     try {
-      const fetchedAbi = await fetchAbiFromExplorer(contractAddress, network.explorerApi);
+      const fetchedAbi = await fetchAbiFromExplorer(contractAddress, network.explorerApi, network.chainId);
       setAbi(fetchedAbi);
       toast.success("ABI fetched! Running security scan...");
       
@@ -384,7 +384,7 @@ function HomeContent() {
         }
 
         try {
-          const contractAbi = await fetchAbiFromExplorer(contract.address, contractNetwork.explorerApi);
+          const contractAbi = await fetchAbiFromExplorer(contract.address, contractNetwork.explorerApi, contractNetwork.chainId);
           const parsedAbi = parseAbi(contractAbi) as AbiItem[];
           
           const serverName = contract.name.toLowerCase().replace(/\s+/g, "-");
