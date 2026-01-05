@@ -1,0 +1,11 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://mcp.ucai.tech/sitemap.xml
+
+# LLM-friendly content
+# See llms.txt for AI/LLM-optimized content
+# https://mcp.ucai.tech/llms.txt
+# https://mcp.ucai.tech/llms-full.txt
