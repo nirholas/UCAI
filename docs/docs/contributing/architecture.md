@@ -78,6 +78,134 @@ graph TB
     P --> S
 ```
 
+## Data Model Flow
+
+This diagram shows how data models transform as they move through the pipeline:
+
+```mermaid
+flowchart TB
+    subgraph Input["Raw Input"]
+        RAW["JSON ABI\n(List of Dict)"]
+    end
+    
+    subgraph ParserModels["Parser Output Models"]
+        ABIParam["ABIParameter"]
+        ABIFunc["ABIFunction"]
+        ABIEvent["ABIEvent"]
+        ABIErr["ABIError"]
+        Parsed["ParsedABI"]
+        
+        ABIParam --> ABIFunc
+        ABIParam --> ABIEvent
+        ABIParam --> ABIErr
+        ABIFunc --> Parsed
+        ABIEvent --> Parsed
+        ABIErr --> Parsed
+    end
+    
+    subgraph MapperModels["Mapper Output Models"]
+        ToolParam["ToolParameter"]
+        MappedTool["MappedTool"]
+        ResField["ResourceField"]
+        MappedRes["MappedResource"]
+        
+        ToolParam --> MappedTool
+        ResField --> MappedRes
+    end
+    
+    subgraph GenModels["Generator Output Models"]
+        GenFile["GeneratedFile"]
+        GenServer["GeneratedServer"]
+        
+        GenFile --> GenServer
+    end
+    
+    RAW --> Parsed
+    ABIFunc --> MappedTool
+    ABIEvent --> MappedRes
+    MappedTool --> GenServer
+    MappedRes --> GenServer
+    
+    style Parsed fill:#ff9,stroke:#333,stroke-width:2px
+    style MappedTool fill:#9f9,stroke:#333,stroke-width:2px
+    style MappedRes fill:#9f9,stroke:#333,stroke-width:2px
+    style GenServer fill:#99f,stroke:#333,stroke-width:2px
+```
+
+## Type Mapping Pipeline
+
+Solidity types are converted to JSON Schema and Python types:
+
+```mermaid
+flowchart LR
+    subgraph Solidity["Solidity Types"]
+        S1["uint256"]
+        S2["address"]
+        S3["bytes32"]
+        S4["string"]
+        S5["bool"]
+        S6["tuple"]
+        S7["uint256[]"]
+    end
+    
+    TM["TypeMapper"]
+    
+    subgraph JSONSchema["JSON Schema"]
+        J1["string + pattern"]
+        J2["string + pattern"]
+        J3["string + pattern"]
+        J4["string"]
+        J5["boolean"]
+        J6["object"]
+        J7["array"]
+    end
+    
+    subgraph Python["Python Types"]
+        P1["str"]
+        P2["str"]
+        P3["str"]
+        P4["str"]
+        P5["bool"]
+        P6["Dict"]
+        P7["List[str]"]
+    end
+    
+    S1 --> TM --> J1 --> P1
+    S2 --> TM --> J2 --> P2
+    S3 --> TM --> J3 --> P3
+    S4 --> TM --> J4 --> P4
+    S5 --> TM --> J5 --> P5
+    S6 --> TM --> J6 --> P6
+    S7 --> TM --> J7 --> P7
+```
+
+## CLI Command Architecture
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant CLI as CLI (Typer)
+    participant Fetcher as FetcherRegistry
+    participant Parser as ABIParser
+    participant Mapper as Mapper
+    participant Gen as MCPGenerator
+    participant FS as FileSystem
+    
+    User->>CLI: abi-to-mcp generate 0x...
+    CLI->>Fetcher: fetch(address, network)
+    Fetcher-->>CLI: FetchResult
+    CLI->>Parser: parse(abi)
+    Parser-->>CLI: ParsedABI
+    CLI->>Mapper: map_functions(parsed)
+    Mapper-->>CLI: List[MappedTool]
+    CLI->>Mapper: map_events(parsed)
+    Mapper-->>CLI: List[MappedResource]
+    CLI->>Gen: generate(parsed, tools, resources)
+    Gen-->>CLI: GeneratedServer
+    CLI->>FS: write files
+    FS-->>User: MCP Server files
+```
+
 ## Module Responsibilities
 
 ### Core (`core/`)

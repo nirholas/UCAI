@@ -19,8 +19,8 @@ This guide walks you through setting up a development environment for abi-to-mcp
 
 ```bash
 # Fork on GitHub, then clone your fork
-git clone https://github.com/YOUR-USERNAME/ABI-to-MCP.git
-cd ABI-to-MCP
+git clone https://github.com/YOUR-USERNAME/UCAI.git
+cd UCAI
 
 # Add upstream remote
 git remote add upstream https://github.com/nirholas/UCAI.git

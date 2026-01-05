@@ -2,7 +2,7 @@
 
 # Default target
 help:
-	@echo "abi-to-mcp Development Commands"
+	@echo "UCAI Development Commands"
 	@echo "================================"
 	@echo ""
 	@echo "Setup:"

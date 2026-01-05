@@ -1,4 +1,4 @@
-# UCAI - Universal Contract AI Interface 
+# UCAI — The ABI-to-MCP Server Generator
 
 ```
     ██╗   ██╗ ██████╗ █████╗ ██╗
@@ -375,7 +375,7 @@ my-mcp-server/
 
 ```bash
 git clone https://github.com/nirholas/UCAI.git
-cd ABI-to-MCP
+cd UCAI
 
 make setup    # Install dependencies
 make test     # Run 876 tests (92% coverage)

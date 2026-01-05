@@ -1,5 +1,5 @@
 """
-abi-to-mcp: Convert Ethereum smart contract ABIs to MCP servers.
+UCAI — The ABI-to-MCP Server Generator.
 
 This package provides tools to generate complete MCP (Model Context Protocol)
 servers from Ethereum smart contract ABIs, enabling AI assistants to interact

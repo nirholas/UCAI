@@ -1,14 +1,14 @@
-# Contributing to abi-to-mcp
+# Contributing to UCAI
 
-Thank you for your interest in contributing to abi-to-mcp! This document provides guidelines and instructions for contributing.
+Thank you for your interest in contributing to UCAI! This document provides guidelines and instructions for contributing.
 
 ## Getting Started
 
 1. **Fork the repository** on GitHub
 2. **Clone your fork** locally:
    ```bash
-   git clone https://github.com/YOUR-USERNAME/ABI-to-MCP.git
-   cd ABI-to-MCP
+   git clone https://github.com/YOUR-USERNAME/UCAI.git
+   cd UCAI
    ```
 3. **Set up the development environment**:
    ```bash

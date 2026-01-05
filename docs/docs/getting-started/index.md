@@ -1,15 +1,15 @@
 ---
 title: Getting Started
-description: Learn how to install and use abi-to-mcp
+description: Learn how to install and use UCAI (abi-to-mcp)
 ---
 
 # Getting Started
 
-Welcome to abi-to-mcp! This section will guide you through installation, your first server generation, and understanding what gets created.
+Welcome to UCAI! This section will guide you through installation, your first server generation, and understanding what gets created.
 
 ## Overview
 
-abi-to-mcp is a command-line tool and Python library that transforms Ethereum smart contract ABIs into fully functional MCP (Model Context Protocol) servers. These servers enable AI assistants like Claude to interact with any smart contract through a standardized interface.
+UCAI is a command-line tool (`abi-to-mcp`) and Python library that transforms Ethereum smart contract ABIs into fully functional MCP (Model Context Protocol) servers. These servers enable AI assistants like Claude to interact with any smart contract through a standardized interface.
 
 ## What You'll Learn
 

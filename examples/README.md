@@ -1,6 +1,6 @@
 # Examples
 
-This directory contains example configurations and ABIs for using abi-to-mcp.
+This directory contains example configurations and ABIs for using UCAI (`abi-to-mcp`).
 
 ## Quick Start Examples
 

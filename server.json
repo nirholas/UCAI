@@ -1,8 +1,8 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.nirholas/UCAI",
-  "description": "UCAI (Universal Contract AI Interface) - Generate MCP servers from any smart contract ABI",
-  "title": "ABI to MCP (UCAI Standard)",
+  "description": "UCAI — The ABI-to-MCP Server Generator. Convert any smart contract ABI into an AI-ready MCP server.",
+  "title": "UCAI",
   "repository": {
     "url": "https://github.com/nirholas/UCAI",
     "source": "github"

@@ -1,13 +1,13 @@
 ---
-title: abi-to-mcp
-description: Convert Ethereum smart contract ABIs to MCP servers
+title: UCAI
+description: The ABI-to-MCP Server Generator — Convert smart contract ABIs to AI-ready MCP servers
 ---
 
-# abi-to-mcp
+# UCAI
 
-**Generate AI-ready interfaces for any smart contract in seconds.**
+**The ABI-to-MCP Server Generator.** Generate AI-ready interfaces for any smart contract in seconds.
 
-abi-to-mcp converts Ethereum smart contract ABIs into [Model Context Protocol (MCP)](https://modelcontextprotocol.io) servers, enabling AI assistants like Claude to interact with DeFi protocols, NFTs, tokens, and any on-chain contract.
+UCAI converts Ethereum smart contract ABIs into [Model Context Protocol (MCP)](https://modelcontextprotocol.io) servers, enabling AI assistants like Claude to interact with DeFi protocols, NFTs, tokens, and any on-chain contract.
 
 <div class="grid cards" markdown>
 
@@ -92,7 +92,7 @@ Here's what it looks like to use a generated MCP server with Claude:
 
     ```bash
     git clone https://github.com/nirholas/UCAI.git
-    cd ABI-to-MCP
+    cd UCAI
     pip install -e .
     ```
 
@@ -148,7 +148,7 @@ graph LR
 
 -   [:octicons-code-24: __Python API__](api/index.md)
 
-    Integrate abi-to-mcp into your own applications.
+    Integrate UCAI into your own applications.
 
 </div>
 
@@ -156,4 +156,4 @@ graph LR
 
 - **GitHub Issues**: [Report bugs or request features](https://github.com/nirholas/UCAI/issues)
 - **Discussions**: [Ask questions and share ideas](https://github.com/nirholas/UCAI/discussions)
-- **Contributing**: [Help improve abi-to-mcp](contributing/index.md)
+- **Contributing**: [Help improve UCAI](contributing/index.md)

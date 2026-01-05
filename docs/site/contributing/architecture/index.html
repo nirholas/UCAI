@@ -24,12 +24,12 @@
         
       
       
-      <link rel="icon" href="../../assets/favicon.png">
+      <link rel="icon" href="../../assets/logo.svg">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Architecture - abi-to-mcp</title>
+        <title>Architecture - UCAI</title>
       
     
     
@@ -104,7 +104,7 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="abi-to-mcp" class="md-header__button md-logo" aria-label="abi-to-mcp" data-md-component="logo">
+    <a href="../.." title="UCAI" class="md-header__button md-logo" aria-label="UCAI" data-md-component="logo">
       
   <img src="../../assets/logo.svg" alt="logo">
 
@@ -117,7 +117,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            abi-to-mcp
+            UCAI
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -446,12 +446,12 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="abi-to-mcp" class="md-nav__button md-logo" aria-label="abi-to-mcp" data-md-component="logo">
+    <a href="../.." title="UCAI" class="md-nav__button md-logo" aria-label="UCAI" data-md-component="logo">
       
   <img src="../../assets/logo.svg" alt="logo">
 
     </a>
-    abi-to-mcp
+    UCAI
   </label>
   
     <div class="md-nav__source">
@@ -1302,6 +1302,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1485,6 +1491,90 @@
     
   
     Runtime
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/core/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Core
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/utils/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilities
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI Internals
   
 
     
@@ -1878,6 +1968,39 @@
     <span class="md-ellipsis">
       
         High-Level Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-model-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Model Flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-mapping-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Type Mapping Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cli-command-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI Command Architecture
       
     </span>
   </a>
@@ -2281,6 +2404,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#data-model-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Model Flow
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#type-mapping-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Type Mapping Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cli-command-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI Command Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#module-responsibilities" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2657,6 +2813,120 @@
     P --&gt; Q
     P --&gt; R
     P --&gt; S</code></pre>
+<h2 id="data-model-flow">Data Model Flow<a class="headerlink" href="#data-model-flow" title="Permanent link">&para;</a></h2>
+<p>This diagram shows how data models transform as they move through the pipeline:</p>
+<pre class="mermaid"><code>flowchart TB
+    subgraph Input["Raw Input"]
+        RAW["JSON ABI\n(List of Dict)"]
+    end
+
+    subgraph ParserModels["Parser Output Models"]
+        ABIParam["ABIParameter"]
+        ABIFunc["ABIFunction"]
+        ABIEvent["ABIEvent"]
+        ABIErr["ABIError"]
+        Parsed["ParsedABI"]
+
+        ABIParam --&gt; ABIFunc
+        ABIParam --&gt; ABIEvent
+        ABIParam --&gt; ABIErr
+        ABIFunc --&gt; Parsed
+        ABIEvent --&gt; Parsed
+        ABIErr --&gt; Parsed
+    end
+
+    subgraph MapperModels["Mapper Output Models"]
+        ToolParam["ToolParameter"]
+        MappedTool["MappedTool"]
+        ResField["ResourceField"]
+        MappedRes["MappedResource"]
+
+        ToolParam --&gt; MappedTool
+        ResField --&gt; MappedRes
+    end
+
+    subgraph GenModels["Generator Output Models"]
+        GenFile["GeneratedFile"]
+        GenServer["GeneratedServer"]
+
+        GenFile --&gt; GenServer
+    end
+
+    RAW --&gt; Parsed
+    ABIFunc --&gt; MappedTool
+    ABIEvent --&gt; MappedRes
+    MappedTool --&gt; GenServer
+    MappedRes --&gt; GenServer
+
+    style Parsed fill:#ff9,stroke:#333,stroke-width:2px
+    style MappedTool fill:#9f9,stroke:#333,stroke-width:2px
+    style MappedRes fill:#9f9,stroke:#333,stroke-width:2px
+    style GenServer fill:#99f,stroke:#333,stroke-width:2px</code></pre>
+<h2 id="type-mapping-pipeline">Type Mapping Pipeline<a class="headerlink" href="#type-mapping-pipeline" title="Permanent link">&para;</a></h2>
+<p>Solidity types are converted to JSON Schema and Python types:</p>
+<pre class="mermaid"><code>flowchart LR
+    subgraph Solidity["Solidity Types"]
+        S1["uint256"]
+        S2["address"]
+        S3["bytes32"]
+        S4["string"]
+        S5["bool"]
+        S6["tuple"]
+        S7["uint256[]"]
+    end
+
+    TM["TypeMapper"]
+
+    subgraph JSONSchema["JSON Schema"]
+        J1["string + pattern"]
+        J2["string + pattern"]
+        J3["string + pattern"]
+        J4["string"]
+        J5["boolean"]
+        J6["object"]
+        J7["array"]
+    end
+
+    subgraph Python["Python Types"]
+        P1["str"]
+        P2["str"]
+        P3["str"]
+        P4["str"]
+        P5["bool"]
+        P6["Dict"]
+        P7["List[str]"]
+    end
+
+    S1 --&gt; TM --&gt; J1 --&gt; P1
+    S2 --&gt; TM --&gt; J2 --&gt; P2
+    S3 --&gt; TM --&gt; J3 --&gt; P3
+    S4 --&gt; TM --&gt; J4 --&gt; P4
+    S5 --&gt; TM --&gt; J5 --&gt; P5
+    S6 --&gt; TM --&gt; J6 --&gt; P6
+    S7 --&gt; TM --&gt; J7 --&gt; P7</code></pre>
+<h2 id="cli-command-architecture">CLI Command Architecture<a class="headerlink" href="#cli-command-architecture" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>sequenceDiagram
+    participant User
+    participant CLI as CLI (Typer)
+    participant Fetcher as FetcherRegistry
+    participant Parser as ABIParser
+    participant Mapper as Mapper
+    participant Gen as MCPGenerator
+    participant FS as FileSystem
+
+    User-&gt;&gt;CLI: abi-to-mcp generate 0x...
+    CLI-&gt;&gt;Fetcher: fetch(address, network)
+    Fetcher--&gt;&gt;CLI: FetchResult
+    CLI-&gt;&gt;Parser: parse(abi)
+    Parser--&gt;&gt;CLI: ParsedABI
+    CLI-&gt;&gt;Mapper: map_functions(parsed)
+    Mapper--&gt;&gt;CLI: List[MappedTool]
+    CLI-&gt;&gt;Mapper: map_events(parsed)
+    Mapper--&gt;&gt;CLI: List[MappedResource]
+    CLI-&gt;&gt;Gen: generate(parsed, tools, resources)
+    Gen--&gt;&gt;CLI: GeneratedServer
+    CLI-&gt;&gt;FS: write files
+    FS--&gt;&gt;User: MCP Server files</code></pre>
 <h2 id="module-responsibilities">Module Responsibilities<a class="headerlink" href="#module-responsibilities" title="Permanent link">&para;</a></h2>
 <h3 id="core-core">Core (<code>core/</code>)<a class="headerlink" href="#core-core" title="Permanent link">&para;</a></h3>
 <p>Central definitions used across the project:</p>
@@ -3063,7 +3333,7 @@
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright &copy; 2024-2026 nirholas
+      Copyright &copy; 2024-2026 nich
     </div>
   
   

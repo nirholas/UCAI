@@ -8,7 +8,7 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in abi-to-mcp, please report it responsibly:
+If you discover a security vulnerability in UCAI, please report it responsibly:
 
 1. **Do NOT** open a public GitHub issue
 2. Email the maintainers directly at [contact@nirholas.dev](mailto:contact@nirholas.dev)
@@ -26,7 +26,7 @@ If you discover a security vulnerability in abi-to-mcp, please report it respons
 
 ## Security Best Practices
 
-When using abi-to-mcp:
+When using UCAI:
 
 ### Private Keys
 
@@ -48,4 +48,4 @@ When using abi-to-mcp:
 
 ## Acknowledgments
 
-We appreciate responsible disclosure and will acknowledge security researchers who help improve abi-to-mcp's security.
+We appreciate responsible disclosure and will acknowledge security researchers who help improve UCAI's security.

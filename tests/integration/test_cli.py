@@ -14,7 +14,7 @@ def test_cli_help():
     """Test CLI shows help."""
     result = runner.invoke(app, ["--help"])
     assert result.exit_code == 0
-    assert "abi-to-mcp" in result.output
+    assert "UCAI" in result.output
 
 
 @pytest.mark.integration

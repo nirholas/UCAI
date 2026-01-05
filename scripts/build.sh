@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "Building abi-to-mcp..."
+echo "Building UCAI (abi-to-mcp)..."
 
 # Clean previous builds
 rm -rf dist/ build/ *.egg-info src/*.egg-info

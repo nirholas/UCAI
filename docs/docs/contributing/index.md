@@ -49,8 +49,8 @@ Thank you for your interest in contributing to abi-to-mcp! This section covers e
 
 ```bash
 # Fork and clone
-git clone https://github.com/YOUR-USERNAME/ABI-to-MCP.git
-cd ABI-to-MCP
+git clone https://github.com/YOUR-USERNAME/UCAI.git
+cd UCAI
 
 # Setup development environment
 make setup

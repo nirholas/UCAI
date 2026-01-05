@@ -1,11 +1,11 @@
 ---
 title: Installation
-description: Install abi-to-mcp on your system
+description: Install UCAI (abi-to-mcp) on your system
 ---
 
 # Installation
 
-This guide covers all methods of installing abi-to-mcp on your system.
+This guide covers all methods of installing UCAI on your system.
 
 ## Requirements
 
@@ -56,7 +56,7 @@ For contributors or those who want the latest unreleased features:
 ```bash
 # Clone the repository
 git clone https://github.com/nirholas/UCAI.git
-cd ABI-to-MCP
+cd UCAI
 
 # Create a virtual environment (recommended)
 python -m venv .venv

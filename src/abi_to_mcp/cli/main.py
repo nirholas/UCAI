@@ -1,4 +1,4 @@
-"""Main CLI application for abi-to-mcp.
+"""Main CLI application for UCAI (abi-to-mcp).
 
 This module defines the Typer CLI application with all commands.
 """
@@ -15,7 +15,7 @@ from abi_to_mcp.version import __version__
 # Initialize Typer app
 app = typer.Typer(
     name="abi-to-mcp",
-    help="Convert Ethereum smart contract ABIs to MCP servers",
+    help="UCAI - The ABI-to-MCP Server Generator",
     add_completion=False,
     no_args_is_help=True,
 )
@@ -26,7 +26,7 @@ console = Console()
 def version_callback(value: bool):
     """Print version and exit."""
     if value:
-        rprint(f"[bold blue]abi-to-mcp[/bold blue] version [green]{__version__}[/green]")
+        rprint(f"[bold blue]UCAI[/bold blue] version [green]{__version__}[/green]")
         raise typer.Exit()
 
 
@@ -42,7 +42,7 @@ def main_callback(
     ),
 ):
     """
-    abi-to-mcp: Convert Ethereum smart contract ABIs to MCP servers.
+    UCAI - The ABI-to-MCP Server Generator.
 
     Generate complete, production-ready MCP servers from any smart contract ABI.
     Supports local files, Etherscan, and Sourcify as ABI sources.
