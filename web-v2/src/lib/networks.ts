@@ -78,9 +78,11 @@ export async function fetchAbiFromExplorer(
   address: string,
   explorerApi: string
 ): Promise<string> {
-  const response = await fetch(
-    `${explorerApi}?module=contract&action=getabi&address=${address}`
-  );
+  const apiKey = process.env.NEXT_PUBLIC_ETHERSCAN_API_KEY || "";
+  const url = apiKey 
+    ? `${explorerApi}?module=contract&action=getabi&address=${address}&apikey=${apiKey}`
+    : `${explorerApi}?module=contract&action=getabi&address=${address}`;
+  const response = await fetch(url);
   const data = await response.json();
   
   if (data.status === "1" && data.result) {

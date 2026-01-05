@@ -373,9 +373,15 @@ function HomeContent() {
       const mcpServers: Record<string, unknown> = {};
       
       // Fetch ABIs and generate servers for each contract
+      const failedContracts: string[] = [];
+      let successCount = 0;
+      
       for (const contract of template.contracts) {
         const contractNetwork = NETWORKS.find(n => n.id === contract.network);
-        if (!contractNetwork?.explorerApi) continue;
+        if (!contractNetwork?.explorerApi) {
+          failedContracts.push(`${contract.name} (no explorer API for ${contract.network})`);
+          continue;
+        }
 
         try {
           const contractAbi = await fetchAbiFromExplorer(contract.address, contractNetwork.explorerApi);
@@ -397,9 +403,23 @@ function HomeContent() {
               RPC_URL: contractNetwork.rpcUrl,
             },
           };
+          successCount++;
         } catch (contractErr) {
+          const errMsg = contractErr instanceof Error ? contractErr.message : "Unknown error";
+          failedContracts.push(`${contract.name}: ${errMsg}`);
           console.warn(`Failed to fetch ABI for ${contract.name}:`, contractErr);
         }
+      }
+
+      // Check if any contracts succeeded
+      if (successCount === 0) {
+        const errorDetails = failedContracts.join(", ");
+        throw new Error(`Failed to fetch ABIs for all contracts. This usually means the block explorer API is rate-limited. Try again in a minute. Details: ${errorDetails}`);
+      }
+
+      // Warn about partial failures
+      if (failedContracts.length > 0) {
+        toast.warning(`Some contracts failed: ${failedContracts.join(", ")}`);
       }
 
       // Create main README with template info
