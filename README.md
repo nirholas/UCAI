@@ -1,4 +1,5 @@
-# UCAI — The ABI-to-MCP Server Generator
+# Universal Contract AI Interface 
+## The ABI-to-MCP Server Generator
 
 ```
     ██╗   ██╗ ██████╗ █████╗ ██╗
