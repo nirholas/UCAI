@@ -1,4 +1,4 @@
-# Universal Contract AI Interface   
+# Universal Contract AI Interface    
 ## The ABI-to-MCP Server Generator
  
 ```
