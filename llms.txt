@@ -94,3 +94,9 @@ MCP, Model Context Protocol, Claude, AI, smart contracts, Ethereum, blockchain, 
 
 ---
 Built for vibecoders 🎸 by vibecoders
+
+## Links
+
+- Repository: https://github.com/nirholas/UCAI
+- Author: https://github.com/nirholas
+- Full documentation: https://raw.githubusercontent.com/nirholas/UCAI/main/llms-full.txt
