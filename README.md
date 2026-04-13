@@ -19,8 +19,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![MCP Compatible](https://img.shields.io/badge/MCP-Compatible-purple.svg)](https://modelcontextprotocol.io)
 [![UCAI Standard](https://img.shields.io/badge/UCAI-Standard-blue.svg)](#-the-ucai-standard)
-
 <p align="center">
+  <a href="https://ucai.tech"><strong>🙇‍♀️ Universal Contract AI Interface</strong></a>
   <a href="https://registry.modelcontextprotocol.io/?q=nirholas"><strong>☑️ UCAI in Anthropic MCP Registry</strong></a>
   &nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="https://mcp.ucai.tech"><strong>🌐 Try the Web Builder →</strong></a>
@@ -33,7 +33,7 @@
 ---
 
 ## 🌐 Try It Live — No Install Required
-https://ucai.tech/
+
 **[mcp.ucai.tech](https://mcp.ucai.tech)** — Generate MCP servers directly in your browser.
 
 
