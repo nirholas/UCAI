@@ -33,7 +33,7 @@
 ---
 
 ## 🌐 Try It Live — No Install Required
-
+https://ucai.tech/
 **[mcp.ucai.tech](https://mcp.ucai.tech)** — Generate MCP servers directly in your browser.
 
 
