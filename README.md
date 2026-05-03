@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/nirholas-ucai-badge.png)](https://mseep.ai/app/nirholas-ucai)
+
 # Universal Contract AI Interface     
 ## The ABI-to-MCP Server Generator 
   
