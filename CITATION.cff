@@ -8,7 +8,7 @@ authors:
     name: nirholas
 repository-code: "https://github.com/nirholas/UCAI"
 url: "https://github.com/nirholas/UCAI"
-license: MIT
+license-url: "https://github.com/nirholas/UCAI/blob/main/LICENSE"
 version: "1.0.0"
 date-released: "2026-02-11"
 keywords:

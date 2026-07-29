@@ -89,7 +89,7 @@ For detailed development setup, see the [Development Guide](https://ucai.tech/co
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the MIT License.
+By contributing, you agree that your contributions will be licensed under the terms of the repository [LICENSE](LICENSE).
 
 ## Code of Conduct
 

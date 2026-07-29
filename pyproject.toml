@@ -3,7 +3,7 @@ name = "abi-to-mcp"
 version = "0.1.0"
 description = "UCAI — The ABI-to-MCP Server Generator. Convert smart contract ABIs to AI-ready MCP servers."
 readme = "README.md"
-license = { text = "MIT" }
+license = { file = "LICENSE" }
 requires-python = ">=3.10"
 authors = [
     { name = "nich", email = "nirholas@users.noreply.github.com" }
@@ -27,7 +27,7 @@ keywords = [
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
+    "License :: Other/Proprietary License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
