@@ -19,12 +19,12 @@
 [![MCP Compatible](https://img.shields.io/badge/MCP-Compatible-purple.svg)](https://modelcontextprotocol.io)
 [![UCAI Standard](https://img.shields.io/badge/UCAI-Standard-blue.svg)](#-the-ucai-standard)
 <p align="center">
-  <a href="https://ucai.tech"><strong>🙇‍♀️ Universal Contract AI Interface</strong></a>
+  <a href="https://ucai-docs-lp642k3kpa-uc.a.run.app"><strong>🙇‍♀️ Universal Contract AI Interface</strong></a>
   <a href="https://registry.modelcontextprotocol.io/?q=nirholas"><strong>☑️ UCAI in Anthropic MCP Registry</strong></a>
   &nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="https://mcp.ucai.tech"><strong>🌐 Try the Web Builder →</strong></a>
   &nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="https://docs.ucai.tech"><strong>📖 Documentation</strong></a>
+  <a href="https://ucai-docs-lp642k3kpa-uc.a.run.app"><strong>📖 Documentation</strong></a>
   &nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#-security-scanner"><strong>🛡️ Security Scanner</strong></a>
 </p>

@@ -83,9 +83,9 @@ make format  # Auto-format code
 
 ## Documentation
 
-Full documentation is available at [ucai.tech](https://ucai.tech).
+Full documentation is available at [ucai.tech](https://ucai-docs-lp642k3kpa-uc.a.run.app).
 
-For detailed development setup, see the [Development Guide](https://ucai.tech/contributing/development/).
+For detailed development setup, see the [Development Guide](https://ucai-docs-lp642k3kpa-uc.a.run.app/contributing/development/).
 
 ## License
 

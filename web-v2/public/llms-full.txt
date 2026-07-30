@@ -252,7 +252,7 @@ MIT License - Free to use, modify, and distribute.
 ## Links
 
 - Production: https://mcp.ucai.tech
-- Documentation: https://docs.ucai.tech
+- Documentation: https://ucai-docs-lp642k3kpa-uc.a.run.app
 - NPM: https://www.npmjs.com/package/ucai
 - GitHub: https://github.com/nirholas/UCAI
 

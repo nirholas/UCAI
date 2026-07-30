@@ -9,7 +9,7 @@ UCAI (Universal Chain AI) connects AI assistants like Claude to blockchain smart
 ## Quick Links
 
 - Web App: https://mcp.ucai.tech
-- Documentation: https://docs.ucai.tech
+- Documentation: https://ucai-docs-lp642k3kpa-uc.a.run.app
 - GitHub: https://github.com/nirholas/UCAI
 - NPM Package: https://www.npmjs.com/package/ucai
 
