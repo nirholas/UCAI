@@ -21,6 +21,10 @@ interface ResourceServerOptions {
  */
 export function x402PaymentRequired(options: ResourceServerOptions): MiddlewareHandler {
   const { facilitatorUrl, paymentRequirements, fetchFn = fetch } = options;
+  const serializedRequirements = {
+    ...paymentRequirements,
+    maxAmountRequired: paymentRequirements.maxAmountRequired.toString(),
+  };
 
   return async (c, next) => {
     const paymentHeader = c.req.header('x-402-payment');
@@ -53,7 +57,10 @@ export function x402PaymentRequired(options: ResourceServerOptions): MiddlewareH
       const verifyRes = await fetchFn(`${facilitatorUrl}/verify`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ payment, paymentRequirements }),
+        body: JSON.stringify({
+          paymentPayload: payment,
+          paymentRequirements: serializedRequirements,
+        }),
       });
 
       const verifyData = (await verifyRes.json()) as VerifyResponse;
@@ -66,7 +73,10 @@ export function x402PaymentRequired(options: ResourceServerOptions): MiddlewareH
       const settleRes = await fetchFn(`${facilitatorUrl}/settle`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ payment, paymentRequirements }),
+        body: JSON.stringify({
+          paymentPayload: payment,
+          paymentRequirements: serializedRequirements,
+        }),
       });
 
       const settleData = (await settleRes.json()) as SettleResponse;
