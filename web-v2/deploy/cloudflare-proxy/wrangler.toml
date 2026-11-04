@@ -1,0 +1,11 @@
+name = "ucai-web-proxy"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+workers_dev = false
+
+[vars]
+ORIGIN = "https://ucai-web-93741856042.us-central1.run.app"
+
+[[routes]]
+pattern = "mcp.ucai.tech"
+custom_domain = true

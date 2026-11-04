@@ -1,20 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { generateSecurityReport, SecurityReport } from "@/lib/security-scanner";
 import { generateBasicExplanation, ContractExplanation } from "@/lib/contract-whisperer";
+import { queryEtherscan } from "@/lib/etherscan";
 
-interface ExplorerConfig {
-  api: string;
-  apiKey?: string;
-}
-
-const EXPLORERS: Record<string, ExplorerConfig> = {
-  ethereum: { api: "https://api.etherscan.io/api" },
-  polygon: { api: "https://api.polygonscan.com/api" },
-  arbitrum: { api: "https://api.arbiscan.io/api" },
-  base: { api: "https://api.basescan.org/api" },
-  optimism: { api: "https://api-optimistic.etherscan.io/api" },
-  bsc: { api: "https://api.bscscan.com/api" },
-  avalanche: { api: "https://api.snowtrace.io/api" },
+// Etherscan V2 chain IDs for the supported networks.
+const CHAIN_IDS: Record<string, number> = {
+  ethereum: 1,
+  polygon: 137,
+  arbitrum: 42161,
+  base: 8453,
+  optimism: 10,
+  bsc: 56,
+  avalanche: 43114,
 };
 
 export async function POST(request: NextRequest) {
@@ -28,8 +25,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const explorer = EXPLORERS[network];
-    if (!explorer) {
+    const chainId = CHAIN_IDS[network];
+    if (!chainId) {
       return NextResponse.json(
         { error: "Unsupported network" },
         { status: 400 }
@@ -37,10 +34,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Fetch ABI
-    const abiResponse = await fetch(
-      `${explorer.api}?module=contract&action=getabi&address=${address}`
-    );
-    const abiData = await abiResponse.json();
+    const abiData = await queryEtherscan(chainId, "getabi", address);
     
     let abi: unknown[] | null = null;
     let isVerified = false;
@@ -55,10 +49,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Fetch source code
-    const sourceResponse = await fetch(
-      `${explorer.api}?module=contract&action=getsourcecode&address=${address}`
-    );
-    const sourceData = await sourceResponse.json();
+    const sourceData = await queryEtherscan(chainId, "getsourcecode", address);
 
     let sourceCode: string | null = null;
     let contractName: string | undefined;
@@ -103,10 +94,7 @@ export async function POST(request: NextRequest) {
     // If it's a proxy, also fetch implementation source
     let implementationSource: string | null = null;
     if (isProxy && implementationAddress) {
-      const implResponse = await fetch(
-        `${explorer.api}?module=contract&action=getsourcecode&address=${implementationAddress}`
-      );
-      const implData = await implResponse.json();
+      const implData = await queryEtherscan(chainId, "getsourcecode", implementationAddress);
       
       if (implData.status === "1" && implData.result?.[0]) {
         implementationSource = implData.result[0].SourceCode || null;

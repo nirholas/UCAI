@@ -19,12 +19,12 @@
 [![MCP Compatible](https://img.shields.io/badge/MCP-Compatible-purple.svg)](https://modelcontextprotocol.io)
 [![UCAI Standard](https://img.shields.io/badge/UCAI-Standard-blue.svg)](#-the-ucai-standard)
 <p align="center">
-  <a href="https://ucai-docs-lp642k3kpa-uc.a.run.app"><strong>🙇‍♀️ Universal Contract AI Interface</strong></a>
+  <a href="https://ucai.tech"><strong>🙇‍♀️ Universal Contract AI Interface</strong></a>
   <a href="https://registry.modelcontextprotocol.io/?q=nirholas"><strong>☑️ UCAI in Anthropic MCP Registry</strong></a>
   &nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="https://mcp.ucai.tech"><strong>🌐 Try the Web Builder →</strong></a>
   &nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="https://ucai-docs-lp642k3kpa-uc.a.run.app"><strong>📖 Documentation</strong></a>
+  <a href="https://ucai.tech"><strong>📖 Documentation</strong></a>
   &nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#-security-scanner"><strong>🛡️ Security Scanner</strong></a>
 </p>
@@ -920,17 +920,18 @@ curl -X POST https://modelcontextprotocol.name/mcp/ucai \
 
 ### Also Available On
 
-- **[SperaxOS](https://speraxos.vercel.app)** — Browse and install from the [MCP marketplace](https://speraxos.vercel.app/community/mcp)
+- **[SperaxOS](https://chat.sperax.io)** — Browse and install from the [MCP marketplace](https://chat.sperax.io/community/mcp)
 - **All 27 MCP servers** — See the full catalog at [modelcontextprotocol.name](https://modelcontextprotocol.name)
 
 > Powered by [modelcontextprotocol.name](https://modelcontextprotocol.name) — the open MCP HTTP gateway
 
 ## Documentation
 
-Full documentation site: **https://nirholas.github.io/UCAI/**
+Full documentation site: **https://ucai.tech**
 
 - [Getting started](docs/getting-started.md) covers install and first run.
 - [Examples](docs/examples.md) has copy-paste snippets.
+- [Deploying to Cloudflare Pages](docs/deploy-cloudflare.md) covers how https://ucai.tech (docs) and https://mcp.ucai.tech (web builder, Cloud Run) are hosted.
 
 ## Star History
 

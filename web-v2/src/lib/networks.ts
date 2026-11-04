@@ -79,9 +79,7 @@ export async function fetchAbiFromExplorer(
   explorerApi: string,
   chainId?: number
 ): Promise<string> {
-  const apiKey = process.env.NEXT_PUBLIC_ETHERSCAN_API_KEY || "";
-  
-  // Use Etherscan V2 API for Etherscan-family explorers (requires chainid)
+  // Use the server-side Etherscan V2 proxy for Etherscan-family explorers (requires chainid)
   const isEtherscanFamily = explorerApi.includes("etherscan.io") || 
                             explorerApi.includes("polygonscan.com") ||
                             explorerApi.includes("arbiscan.io") ||
@@ -89,17 +87,9 @@ export async function fetchAbiFromExplorer(
                             explorerApi.includes("bscscan.com") ||
                             explorerApi.includes("snowtrace.io");
   
-  let url: string;
-  if (isEtherscanFamily && chainId) {
-    // Etherscan V2 API format
-    const baseUrl = "https://api.etherscan.io/v2/api";
-    url = `${baseUrl}?chainid=${chainId}&module=contract&action=getabi&address=${address}`;
-    if (apiKey) url += `&apikey=${apiKey}`;
-  } else {
-    // Fallback to original explorer API
-    url = `${explorerApi}?module=contract&action=getabi&address=${address}`;
-    if (apiKey) url += `&apikey=${apiKey}`;
-  }
+  const url = isEtherscanFamily && chainId
+    ? `/api/explorer?chainid=${chainId}&action=getabi&address=${address}`
+    : `${explorerApi}?module=contract&action=getabi&address=${address}`;
   
   const response = await fetch(url);
   const data = await response.json();
