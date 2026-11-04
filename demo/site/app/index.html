@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Console · UCAI Cloud</title>
+<link rel="icon" href="/favicon.svg">
+<link rel="stylesheet" href="/kit/kit.css">
+<link rel="stylesheet" href="/ucai.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/"><span class="logo-mark">U</span> UCAI Cloud</a>
+    <nav class="nav-links"><a href="/">Home</a><a href="/#api">API &amp; MCP</a><a href="https://github.com/nirholas/UCAI" rel="noopener">GitHub</a></nav>
+    <div data-kit-auth></div>
+  </div>
+</header>
+
+<main class="app-main wrap">
+  <div id="app" hidden>
+    <div class="app-head"><h1>Console</h1><span class="muted" id="who"></span></div>
+
+    <form class="card stack" id="target" autocomplete="off">
+      <div class="form-grid">
+        <label class="field">Chain<select class="input" name="chain" id="t-chain" required></select></label>
+        <label class="field span">Contract address<input class="input" name="address" id="t-address" placeholder="0x…" pattern="^0x[0-9a-fA-F]{40}$" required spellcheck="false"></label>
+      </div>
+      <div class="row">
+        <div class="row grow" id="presets"><span class="skeleton sk-sm"></span></div>
+        <button class="btn btn-primary" type="submit">Load contract</button>
+      </div>
+    </form>
+
+    <div class="tabs" role="tablist">
+      <button type="button" data-tab="explore" role="tab">ABI &amp; tools</button>
+      <button type="button" data-tab="scan" role="tab">Security scan</button>
+      <button type="button" data-tab="explain" role="tab">Explain</button>
+      <button type="button" data-tab="call" role="tab">Read / write</button>
+      <button type="button" data-tab="events" role="tab">Events</button>
+      <button type="button" data-tab="codegen" role="tab">FastMCP server</button>
+      <button type="button" data-tab="saved" role="tab">Saved</button>
+      <button type="button" data-tab="tools" role="tab">Tools</button>
+      <button type="button" data-tab="mcp" role="tab">MCP</button>
+      <button type="button" data-tab="keys" role="tab">API keys</button>
+      <button type="button" data-tab="usage" role="tab">Usage</button>
+    </div>
+
+    <section data-panel="explore" class="stack"><div id="explore"></div></section>
+    <section data-panel="scan" class="stack" hidden><div id="scan"></div></section>
+    <section data-panel="explain" class="stack" hidden><div id="explain"></div></section>
+
+    <section data-panel="call" class="stack" hidden>
+      <div class="card stack">
+        <label class="field">Function<select class="input" id="fn-select"></select></label>
+        <p class="muted" id="fn-desc"></p>
+        <form class="stack" id="fn-form"></form>
+      </div>
+      <div id="fn-out"></div>
+    </section>
+
+    <section data-panel="events" class="stack" hidden>
+      <form class="card form-grid" id="ev-form">
+        <label class="field">Event<select class="input" name="event" id="ev-select"></select></label>
+        <label class="field">Blocks back<input class="input" name="blocks" type="number" min="1" max="2000" value="500"></label>
+        <label class="field">Limit<input class="input" name="limit" type="number" min="1" max="200" value="50"></label>
+        <div class="row end span"><button class="btn btn-primary" type="submit">Fetch events</button></div>
+      </form>
+      <div id="ev-out"></div>
+    </section>
+
+    <section data-panel="codegen" class="stack" hidden><div id="codegen"></div></section>
+
+    <section data-panel="saved" class="stack" hidden>
+      <div class="card row">
+        <p class="grow muted">Saved contracts get their own MCP endpoint with one tool per function. You can save up to 25.</p>
+        <button class="btn btn-primary" id="save-current" type="button">Save the loaded contract</button>
+      </div>
+      <div id="saved"></div>
+    </section>
+
+    <section data-panel="tools" class="stack" hidden>
+      <div class="grid-2">
+        <div class="card stack">
+          <input class="input" id="tool-filter" type="search" placeholder="Filter tools…" aria-label="Filter tools">
+          <div id="tool-list" class="tool-list"></div>
+        </div>
+        <div class="card stack" id="tool-pane"><p class="empty-inline muted">Pick a tool to run it against live chain data.</p></div>
+      </div>
+    </section>
+
+    <section data-panel="mcp" class="stack" hidden>
+      <div class="card stack">
+        <h3>Global MCP endpoint</h3>
+        <p class="muted">Stateless Streamable HTTP. Authenticate with an API key from the API keys tab. Each saved contract also has its own endpoint, listed in the Saved tab.</p>
+        <div class="row"><code class="grow trunc" id="mcp-url"></code><button type="button" class="btn btn-sm" id="mcp-copy">Copy URL</button></div>
+        <pre class="code" id="mcp-config"></pre>
+        <pre class="code" id="mcp-curl"></pre>
+      </div>
+      <div class="card stack"><h3>Tools exposed</h3><div id="mcp-tools"></div></div>
+    </section>
+
+    <section data-panel="keys" class="stack" hidden><div id="keys"></div></section>
+    <section data-panel="usage" class="stack" hidden><div id="usage"></div></section>
+  </div>
+</main>
+
+<footer class="footer"><div class="wrap row"><span class="grow muted">UCAI Cloud · writes are simulated; anything you send is signed in your own wallet</span><a href="https://github.com/nirholas/UCAI" rel="noopener">Source</a></div></footer>
+<script type="module" src="/app/app.js"></script>
+</body>
+</html>

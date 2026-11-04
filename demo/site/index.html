@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>UCAI Cloud: turn any verified smart contract into MCP tools</title>
+<meta name="description" content="UCAI Cloud is a hosted demo of UCAI (abi-to-mcp). Paste any verified EVM contract to get its ABI as MCP tools, a security scan, a plain-English explanation, live reads, write simulation, recent events and a generated FastMCP server. Sign in with a wallet and use it from the browser, a REST API or MCP.">
+<link rel="icon" href="/favicon.svg">
+<link rel="stylesheet" href="/kit/kit.css">
+<link rel="stylesheet" href="/ucai.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/"><span class="logo-mark">U</span> UCAI Cloud</a>
+    <nav class="nav-links">
+      <a href="#live">Live scans</a>
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#api">API &amp; MCP</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+    <div data-kit-auth></div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">ABI → MCP · 8 EVM chains · security scanner</span>
+      <h1>Any contract.<br><span class="grad">Your agent speaks it.</span></h1>
+      <p class="lede">UCAI Cloud is a hosted demo of UCAI, the ABI-to-MCP server generator. Enter a verified contract address on Ethereum, Base, Arbitrum, Optimism, Polygon, BNB Chain, Avalanche or Sepolia. You get every function as a typed MCP tool, a rug-pull risk scan, a plain-English explanation, live reads, write simulation from your wallet, recent events and a ready-to-run Python FastMCP server. Save a contract and it gets its own MCP endpoint.</p>
+      <div class="row">
+        <a class="btn btn-primary btn-lg" href="/app/">Open the console</a>
+        <a class="btn btn-lg" href="#how">See how it works</a>
+        <a class="btn btn-ghost btn-lg" href="https://github.com/nirholas/UCAI" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="live">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Live risk scans of well-known contracts</h2>
+        <p>The worker fetches each verified ABI and source from Sourcify, Blockscout or Routescan, reads owner and proxy state on-chain, and scores admin powers such as minting, pausing, blacklisting and upgrades. Results are cached for 30 minutes. Select a card to open it in the console.</p>
+      </div>
+      <div class="board" id="board" aria-live="polite"></div>
+      <p class="ticker-note muted" id="board-note"></p>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="features">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Everything an agent needs to use a contract</h2>
+        <p>Sign in with MetaMask, Rabby, Coinbase Wallet, Phantom or any EIP-6963 or Solana wallet. All reads hit the chain through public RPCs. Writes are simulated with <code>eth_call</code>, and you sign them in your own wallet only if you choose to.</p>
+      </div>
+      <div class="grid">
+        <div class="card feature"><div class="ico">⌬</div><h3>ABI to MCP tools</h3><p class="muted">Every function becomes a tool with a JSON Schema built from its Solidity types, including tuples and arrays. Proxies are followed to their implementation automatically.</p></div>
+        <div class="card feature"><div class="ico">⛨</div><h3>Security scan</h3><p class="muted">A 0–100 score with findings for mint, pause, blacklist, fee changes, upgradeability, selfdestruct and tx.origin. Owner state is read live, so renounced ownership counts in your favour.</p></div>
+        <div class="card feature"><div class="ico">❝</div><h3>Contract whisperer</h3><p class="muted">A plain-English summary of what the contract is, which standards it implements, its live state and what each read, write and admin function does.</p></div>
+        <div class="card feature"><div class="ico">⇆</div><h3>Read, simulate, send</h3><p class="muted">Call any view function. Simulate any write from your address to see the result, revert reason and gas, then send it from your wallet if you want to.</p></div>
+        <div class="card feature"><div class="ico">≋</div><h3>Event explorer</h3><p class="muted">Decode recent logs for any event over up to 2,000 blocks, with links to each transaction.</p></div>
+        <div class="card feature"><div class="ico">⌁</div><h3>Per-contract MCP</h3><p class="muted">Save up to 25 contracts. Each one gets its own <code>/mcp/:id</code> endpoint, so Claude or Cursor sees only that contract's functions. You can also generate a standalone FastMCP server.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>From address to agent tool in four steps</h2>
+        <p>Nothing is signed or sent unless you press Send and confirm in your wallet.</p>
+      </div>
+      <div class="steps">
+        <div class="card"><h3>Sign in</h3><p class="muted">Connect a wallet and sign one message (SIWE or SIWS). There is no gas and no account to create, and your session lasts 30 days.</p></div>
+        <div class="card"><h3>Paste an address</h3><p class="muted">Pick a chain and a verified contract, or start from a preset such as USDC or the Uniswap V2 router.</p></div>
+        <div class="card"><h3>Scan and explore</h3><p class="muted">Check the risk score, read state, simulate writes and browse recent events.</p></div>
+        <div class="card"><h3>Hand it to your agent</h3><p class="muted">Save the contract and paste its MCP URL into your client, or copy the generated FastMCP server.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="api">
+    <div class="wrap grid-2">
+      <div>
+        <h2>Built for agents first</h2>
+        <p class="muted">The console calls the same routes your agents do. Create a key under <a href="/app/#keys">API keys</a> and call these routes:</p>
+        <ul>
+          <li><code>GET /api/contract/:chain/:address</code> returns the ABI as MCP-ready tools</li>
+          <li><code>GET …/scan</code>, <code>…/explain</code>, <code>…/events</code> and <code>…/codegen</code></li>
+          <li><code>POST …/read</code> and <code>POST …/simulate</code> take <code>{"function","args"}</code></li>
+          <li><code>POST /mcp</code> is the global MCP server, and <code>POST /mcp/:id</code> serves one saved contract (both stateless Streamable HTTP)</li>
+        </ul>
+      </div>
+      <pre class="code"><span class="c"># Security-scan USDC on Ethereum</span>
+curl -s https://ucai.ninabrekkerese.workers.dev/api/contract/ethereum/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/scan \
+  -H "authorization: Bearer $UCAI_KEY"
+
+<span class="c"># mcp.json</span>
+{
+  "mcpServers": {
+    "ucai": {
+      "type": "http",
+      "url": "https://ucai.ninabrekkerese.workers.dev/mcp",
+      "headers": { "Authorization": "Bearer sk_ucai_…" }
+    }
+  }
+}</pre>
+    </div>
+  </section>
+
+  <section class="section" id="pricing">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Pricing</h2>
+        <p>UCAI Cloud is a public demo of the open-source UCAI project.</p>
+      </div>
+      <div class="grid">
+        <div class="card price featured">
+          <h3>Demo</h3>
+          <div class="v">$0</div>
+          <ul><li>All 10 tools in the console and over MCP</li><li>25 saved contracts, each with its own MCP endpoint</li><li>API keys and a full usage log</li></ul>
+          <a class="btn btn-primary" href="/app/">Start now</a>
+        </div>
+        <div class="card price">
+          <h3>Custody</h3>
+          <div class="v">Yours</div>
+          <ul><li>Writes are simulated, not sent</li><li>Sending always goes through your own wallet's confirmation</li><li>No private key is ever requested</li></ul>
+          <a class="btn" href="/app/#scan">Scan a contract</a>
+        </div>
+        <div class="card price">
+          <h3>Self-host</h3>
+          <div class="v">Source</div>
+          <ul><li><code>pip install abi-to-mcp</code></li><li><code>abi-to-mcp generate &lt;address&gt; -o ./server</code></li><li>This demo runs on Cloudflare Workers + D1</li><li>See the repository for license terms</li></ul>
+          <a class="btn" href="https://github.com/nirholas/UCAI" rel="noopener">View on GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap row">
+    <span class="grow muted">UCAI Cloud · ABIs from Sourcify, Blockscout and Routescan · RPC by publicnode</span>
+    <a href="https://github.com/nirholas/UCAI" rel="noopener">GitHub</a>
+    <a href="/app/">Console</a>
+  </div>
+</footer>
+<script type="module" src="/landing.js"></script>
+</body>
+</html>
