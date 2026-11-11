@@ -1,0 +1,1 @@
+{"name":"ucai","version":"0.1.0","description":"Turn any EVM smart contract ABI into a runnable MCP server with the abi-to-mcp CLI (generate, inspect, validate, serve).","author":{"name":"nirholas"},"repository":"https://github.com/nirholas/UCAI","homepage":"https://ucai.ninabrekkerese.workers.dev","keywords":["mcp","abi","smart-contracts","evm","web3","cli"]}
