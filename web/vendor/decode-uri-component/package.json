@@ -1,0 +1,16 @@
+{
+	"name": "decode-uri-component",
+	"version": "0.2.2",
+	"description": "decode-uri-component 0.2.2 API with the linear-time decoder from 0.5.1 (fixes GHSA-vcc3-ghjq-m6fr and GHSA-qr28-fpjm-wq7f for CommonJS consumers)",
+	"license": "MIT",
+	"repository": "SamVerschueren/decode-uri-component",
+	"author": {
+		"name": "Sam Verschueren",
+		"email": "sam.verschueren@gmail.com",
+		"url": "github.com/SamVerschueren"
+	},
+	"main": "index.js",
+	"engines": {
+		"node": ">=0.10"
+	}
+}
